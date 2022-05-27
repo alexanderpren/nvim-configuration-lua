@@ -48,10 +48,13 @@ return packer.startup(function(use)
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
-  use "akinsho/bufferline.nvim"
+  -- using packer.nvim
+  use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
   use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
-  use "akinsho/toggleterm.nvim"
+  use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
+  require("toggleterm").setup()
+  end}
   use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
@@ -60,7 +63,7 @@ return packer.startup(function(use)
   use "folke/which-key.nvim"
 
   -- Colorschemes
-  -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
+  use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
 
   -- cmp plugins
@@ -70,19 +73,32 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-nvim-lsp-signature-help"
+  use "onsails/lspkind-nvim"
+  use "hrsh7th/cmp-nvim-lua"
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-
+  use "SirVer/ultisnips"
+  use "honza/vim-snippets"
+  use "mlaursen/vim-react-snippets"
+  use "quangnguyen30192/cmp-nvim-ultisnips"
+  
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-
+  use "jose-elias-alvarez/nvim-lsp-ts-utils"
+  use "sbdchd/neoformat" -- format code
+  -- Copilot
+  use "github/copilot.vim"
   -- Telescope
-  use "nvim-telescope/telescope.nvim"
+  use {
+  'nvim-telescope/telescope.nvim',
+  requires = { {'nvim-lua/plenary.nvim','nvim-lua/popup.nvim','nvim-telescope/telescope-fzy-native.nvim'} }
+}
 
   -- Treesitter
   use {
@@ -93,6 +109,11 @@ return packer.startup(function(use)
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+
+  -- vscode-es7-javascript-react-snippetsuse
+  use {"dsznajder/vscode-es7-javascript-react-snippets",
+run = "yarn install --frozen-lockfile && yarn compile",
+}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

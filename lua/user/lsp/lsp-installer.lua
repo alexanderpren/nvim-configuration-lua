@@ -11,6 +11,10 @@ lsp_installer.on_server_ready(function(server)
 		capabilities = require("user.lsp.handlers").capabilities,
 	}
 
+   if server.name == "emmet_ls" then
+    opts.filetypes = {"html","css", "blade"}
+   end
+
 	 if server.name == "jsonls" then
 	 	local jsonls_opts = require("user.lsp.settings.jsonls")
 	 	opts = vim.tbl_deep_extend("force", jsonls_opts, opts)

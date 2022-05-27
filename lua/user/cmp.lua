@@ -49,6 +49,7 @@ cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
+      vim.fn["UltiSnips#Anon"](args.body)
     end,
   },
   mapping = {
@@ -110,6 +111,7 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = "ultisnips"},
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "buffer" },
@@ -119,9 +121,9 @@ cmp.setup {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
-  documentation = {
+  window = {documentation = {
     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-  },
+  }},
   experimental = {
     ghost_text = false,
     native_menu = false,
